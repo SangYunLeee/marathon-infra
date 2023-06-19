@@ -30,11 +30,11 @@ resource "aws_ecs_task_definition" "app_task" {
       "environment": [
         {
           "name": "AWS_ACCESS_KEY_ID",
-          "value": var.aws_access_key
+          "value": var.AWS_ACCESS_KEY_ID
         },
         {
           "name": "AWS_SECRET_ACCESS_KEY",
-          "value": var.aws_secret_access_key
+          "value": var.AWS_SECRET_ACCESS_KEY
         }
         // Add more environment variables if needed
       ]
