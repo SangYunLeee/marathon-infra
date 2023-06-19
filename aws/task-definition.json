@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:12",
   "containerDefinitions": [
       {
           "name": "race-user",
-          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:be746b77d16bd2a72ef57cb9e060b966adf2eb33",
+          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:cdde29e789d79b3028c99fd6b434716c7bf7331c",
           "cpu": 0,
           "portMappings": [
               {
@@ -15,20 +15,19 @@
               }
           ],
           "essential": true,
-          "environment": [
+          "environment": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "secrets": [
               {
                   "name": "AWS_ACCESS_KEY",
-                  "value": "AKIAZNZNVZ3SXPWOGCUF"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_ACCESS_KEY::"
               },
               {
                   "name": "AWS_SECRET_ACCESS_KEY",
-                  "value": "IOnZPLbsmGzC4Y811Z3x/wX9u84fo9a/TMgrLWlN"
+                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_SECRET_ACCESS_KEY::"
               }
           ],
-          "environmentFiles": [],
-          "mountPoints": [],
-          "volumesFrom": [],
-          "ulimits": [],
           "logConfiguration": {
               "logDriver": "awslogs",
               "options": {
@@ -44,7 +43,7 @@
   "taskRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 1,
+  "revision": 12,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -59,6 +58,9 @@
       },
       {
           "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+          "name": "ecs.capability.secrets.asm.environment-variables"
       },
       {
           "name": "com.amazonaws.ecs.capability.task-iam-role"
@@ -90,7 +92,7 @@
       "cpuArchitecture": "X86_64",
       "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-06-19T05:35:42.083Z",
+  "registeredAt": "2023-06-19T07:18:22.527Z",
   "registeredBy": "arn:aws:iam::648098991845:user/hansung",
   "tags": []
 }
