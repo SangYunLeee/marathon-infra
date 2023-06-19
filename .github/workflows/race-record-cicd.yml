@@ -13,7 +13,7 @@ env:
   ECS_SERVICE: tf-ecs-service
   ECS_CLUSTER: race_record_cluster
   ECS_TASK_DEFINITION: ./aws/task-definition.json
-  CONTAINER_NAME: race-record
+  CONTAINER_NAME: tf-race-record-task
   
   
 jobs:
