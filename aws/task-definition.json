@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:2",
     "containerDefinitions": [
         {
             "name": "race-user",
-            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:latest",
+            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:0d26482ace14b6d2e087b01bd7e9d1bc78986323",
             "cpu": 0,
             "portMappings": [
                 {
@@ -25,26 +25,24 @@
                     "value": "IOnZPLbsmGzC4Y811Z3x/wX9u84fo9a/TMgrLWlN"
                 }
             ],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
                     "awslogs-create-group": "true",
-                    "awslogs-group": "/ecs/race-user",
+                    "awslogs-group": "/ecs/race-user-task",
                     "awslogs-region": "ap-northeast-2",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
         }
     ],
-    "family": "race-user",
+    "family": "race-user-task",
     "taskRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 2,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -90,7 +88,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2023-06-19T01:03:15.768Z",
-    "registeredBy": "arn:aws:iam::648098991845:user/hansu",
+    "registeredAt": "2023-06-19T05:41:04.306Z",
+    "registeredBy": "arn:aws:iam::648098991845:user/hansung",
     "tags": []
 }
