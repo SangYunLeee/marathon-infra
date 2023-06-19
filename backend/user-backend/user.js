@@ -1,16 +1,21 @@
+require('dotenv').config(); // Load environment variables from .env file
+
 const express = require('express');
 const app = express();
 const AWS = require('aws-sdk');
 const jwt = require('jsonwebtoken');
 
+const region = 'ap-northeast-2';
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+
 AWS.config.update({
-  region: 'ap-northeast-2', 
-  accessKeyId: 'AKIAYRUU7OQTAQ3FKWXW',
-  secretAccessKey: 'xtnthyZH2AxhT4rCbViV0ynvKGjA1NswdA7HTVxz'
-}); // Replace with your desired AWS region
+  region,
+  accessKeyId,
+  secretAccessKey,
+});
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const tableName = 'users';
 
 app.use(express.json()); // Parse JSON request bodies
@@ -18,16 +23,6 @@ app.use(express.json()); // Parse JSON request bodies
 // Route for login
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-
-  // Verify login credentials in DynamoDB
-  // const params = {
-  //   TableName: tableName,
-  //   Key: {
-  //     id: { N: '1' },
-  //     email: { S: "test@gmail.com" }
-  //   },
-  //   ProjectionExpression: 'password' // Include only the password attribute in the response
-  // };
 
   const params = {
     TableName: "users",
@@ -84,6 +79,9 @@ app.get('/test', (req, res) => {
 app.get('/', async (req, res) => {
 
   res.status(200).json({ message: 'Healthy check success!' });
+
+  console.log("accessKeyId : ", accessKeyId)
+  console.log("secretAccessKey : ", secretAccessKey)
 
 });
 
