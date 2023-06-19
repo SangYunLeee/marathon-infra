@@ -37,7 +37,7 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ env.login-ecr.outputs.registry }}
-        IMAGE_TAG: v1
+        IMAGE_TAG: ${{ github.sha }}
       working-directory: ./backend/user-backend
       run: |
         # Build a docker container and
