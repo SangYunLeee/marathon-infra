@@ -1,9 +1,9 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:1",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:8",
   "containerDefinitions": [
       {
           "name": "race-user",
-          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:be746b77d16bd2a72ef57cb9e060b966adf2eb33",
+          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:3b1984e11d949bf7a0169c52b1f7842f832aeabb",
           "cpu": 0,
           "portMappings": [
               {
@@ -18,17 +18,15 @@
           "environment": [
               {
                   "name": "AWS_ACCESS_KEY",
-                  "value": "AKIAZNZNVZ3SXPWOGCUF"
+                  "value": "AKIAZNZNVZ3SYCEL4YXL"
               },
               {
                   "name": "AWS_SECRET_ACCESS_KEY",
-                  "value": "IOnZPLbsmGzC4Y811Z3x/wX9u84fo9a/TMgrLWlN"
+                  "value": "Ga1N8K2I4MbMEcTFOYaTcrKhMdld4iiKXWR2h1ME"
               }
           ],
-          "environmentFiles": [],
           "mountPoints": [],
           "volumesFrom": [],
-          "ulimits": [],
           "logConfiguration": {
               "logDriver": "awslogs",
               "options": {
@@ -44,7 +42,7 @@
   "taskRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
   "executionRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 1,
+  "revision": 8,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -90,7 +88,7 @@
       "cpuArchitecture": "X86_64",
       "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-06-19T05:35:42.083Z",
+  "registeredAt": "2023-06-19T06:32:43.497Z",
   "registeredBy": "arn:aws:iam::648098991845:user/hansung",
   "tags": []
 }
