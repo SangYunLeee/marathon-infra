@@ -16,11 +16,11 @@
             "environment": [
                 {
                     "name": "AWS_ACCESS_KEY_ID",
-                    "value": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_ACCESS_KEY::"
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_ACCESS_KEY::"
                 },
                 {
                     "name": "AWS_SECRET_ACCESS_KEY",
-                    "value": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_SECRET_ACCESS_KEY::"
+                    "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_SECRET_ACCESS_KEY::"
                 }
             ],
             "mountPoints": [],
