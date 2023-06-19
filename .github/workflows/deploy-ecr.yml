@@ -10,7 +10,7 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: users
-  ECR_REGISTRY: 648098991845.dkr.ecr.ap-northeast-2.amazonaws.com
+  
   
 jobs:
   deploy:
@@ -36,7 +36,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        ECR_REGISTRY: ${{ env.ECR_REGISTRY }}
+        ECR_REGISTRY: ${{ env.login-ecr.outputs.registry }}
         IMAGE_TAG: v1
       working-directory: ./backend/user-backend
       run: |
