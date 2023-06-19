@@ -1,98 +1,80 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/race-user-task:12",
-  "containerDefinitions": [
-      {
-          "name": "race-user",
-          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:cdde29e789d79b3028c99fd6b434716c7bf7331c",
-          "cpu": 0,
-          "portMappings": [
-              {
-                  "name": "race-user-3000-tcp",
-                  "containerPort": 3000,
-                  "hostPort": 3000,
-                  "protocol": "tcp",
-                  "appProtocol": "http"
-              }
-          ],
-          "essential": true,
-          "environment": [],
-          "mountPoints": [],
-          "volumesFrom": [],
-          "secrets": [
-              {
-                  "name": "AWS_ACCESS_KEY",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_ACCESS_KEY::"
-              },
-              {
-                  "name": "AWS_SECRET_ACCESS_KEY",
-                  "valueFrom": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_SECRET_ACCESS_KEY::"
-              }
-          ],
-          "logConfiguration": {
-              "logDriver": "awslogs",
-              "options": {
-                  "awslogs-create-group": "true",
-                  "awslogs-group": "/ecs/race-user-task",
-                  "awslogs-region": "ap-northeast-2",
-                  "awslogs-stream-prefix": "ecs"
-              }
-          }
-      }
-  ],
-  "family": "race-user-task",
-  "taskRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
-  "executionRoleArn": "arn:aws:iam::648098991845:role/ecsTaskExecutionRole",
-  "networkMode": "awsvpc",
-  "revision": 12,
-  "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-      },
-      {
-          "name": "ecs.capability.execution-role-awslogs"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-      },
-      {
-          "name": "ecs.capability.secrets.asm.environment-variables"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.task-iam-role"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-      },
-      {
-          "name": "ecs.capability.task-eni"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-      }
-  ],
-  "placementConstraints": [],
-  "compatibilities": [
-      "EC2",
-      "FARGATE"
-  ],
-  "requiresCompatibilities": [
-      "FARGATE"
-  ],
-  "cpu": "1024",
-  "memory": "3072",
-  "runtimePlatform": {
-      "cpuArchitecture": "X86_64",
-      "operatingSystemFamily": "LINUX"
-  },
-  "registeredAt": "2023-06-19T07:18:22.527Z",
-  "registeredBy": "arn:aws:iam::648098991845:user/hansung",
-  "tags": []
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/tf-race-user-task:3",
+    "containerDefinitions": [
+        {
+            "name": "race-user-task",
+            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:4775dbd4b152757ad366d4dc23f57b00904eabdd",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "value": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_ACCESS_KEY::"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "value": "arn:aws:secretsmanager:ap-northeast-2:648098991845:secret:accesskey-bg9Wny:AWS_SECRET_ACCESS_KEY::"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "my-ecs-service-loggroup",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "app-logstream"
+                }
+            }
+        }
+    ],
+    "family": "tf-race-user-task",
+    "executionRoleArn": "arn:aws:iam::648098991845:role/tf-ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 3,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "registeredAt": "2023-06-19T12:28:50.873Z",
+    "registeredBy": "arn:aws:iam::648098991845:root",
+    "tags": []
 }

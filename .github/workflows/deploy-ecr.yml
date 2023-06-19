@@ -3,7 +3,7 @@ name: Deploy to Amazon ECR
 on:
   push:
     branches:
-      - main
+      - feature/ecs-race-user
   pull_request:
     branches:
       - main
@@ -13,7 +13,7 @@ env:
   ECS_SERVICE: race-user-sv
   ECS_CLUSTER: race-cluster
   ECS_TASK_DEFINITION: ./aws/task-definition.json
-  CONTAINER_NAME: race-user
+  CONTAINER_NAME: race-user-task
   
   
 jobs:
