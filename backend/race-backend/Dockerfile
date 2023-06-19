@@ -2,7 +2,8 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package.json .
+COPY package-lock.json .
 
 RUN npm ci
 
@@ -17,8 +18,9 @@ ENV TYPEORM_PASSWORD=unknown
 ENV TYPEORM_DATABASE=race
 ENV TYPEORM_PORT=33306
 ENV TYPEORM_LOGGING=TRUE
-ENV PORT=80
 
-EXPOSE 80
+ENV PORT=5500
+
+EXPOSE 5500
 
 CMD ["npm", "run", "start-production"]
