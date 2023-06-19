@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/tf-race-user-task:3",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/tf-race-user-task:17",
     "containerDefinitions": [
         {
             "name": "race-user-task",
-            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:4775dbd4b152757ad366d4dc23f57b00904eabdd",
+            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/users:2aaa3aa0a8818cd92ae014f937cd88ababc63244",
             "cpu": 0,
             "portMappings": [
                 {
@@ -29,7 +29,7 @@
     "family": "tf-race-user-task",
     "executionRoleArn": "arn:aws:iam::648098991845:role/tf-ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 3,
+    "revision": 17,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -65,7 +65,7 @@
     ],
     "cpu": "1024",
     "memory": "3072",
-    "registeredAt": "2023-06-19T12:28:50.873Z",
+    "registeredAt": "2023-06-19T14:31:09.226Z",
     "registeredBy": "arn:aws:iam::648098991845:root",
     "tags": []
 }
