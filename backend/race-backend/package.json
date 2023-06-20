@@ -3,15 +3,17 @@
     "version": "0.0.1",
     "description": "",
     "scripts": {
-      "start": "nodemon --delay 500ms --watch './src/**/*.ts' --exec \"ts-node\" src/server.ts",
-      "build": "tsc -p tsconfig.json",
-      "start-production": "node build/src/server.js"
+        "start": "nodemon --delay 500ms --watch './src/**/*.ts' --exec \"ts-node\" src/server.ts",
+        "build": "tsc -p tsconfig.json",
+        "start-production": "node build/src/server.js"
     },
     "author": "sangyun",
     "license": "ISC",
     "dependencies": {
+        "@aws-sdk/types": "^3.347.0",
         "@types/cookie-parser": "^1.4.3",
         "@types/nodemon": "^1.19.2",
+        "aws-sdk": "^2.1400.0",
         "axios": "^1.2.0",
         "bcrypt": "^5.1.0",
         "bcryptjs": "^2.4.3",
