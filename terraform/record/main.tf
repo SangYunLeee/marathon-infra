@@ -30,6 +30,10 @@ resource "aws_ecs_task_definition" "app_task" {
         {
           "name": "TYPEORM_PASSWORD",
           "value": "${var.DB_PASSWORD}"
+        },
+        {
+          "name": "QUEUE_URL",
+          "value": "${var.QUEUE_URL}"
         }
       ]
     }
