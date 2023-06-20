@@ -1,76 +1,76 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/tf-race-record-task:10",
-  "containerDefinitions": [
-      {
-          "name": "tf-race-record-task",
-          "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/race:ae42142e5d6d27a443678fbbd96889887f183b09",
-          "cpu": 0,
-          "portMappings": [
-              {
-                  "containerPort": 5500,
-                  "hostPort": 5500,
-                  "protocol": "tcp"
-              }
-          ],
-          "essential": true,
-          "environment": [
-              {
-                  "name": "TYPEORM_PASSWORD",
-                  "value": "dltkddbs"
-              }
-          ],
-          "mountPoints": [],
-          "volumesFrom": [],
-          "logConfiguration": {
-              "logDriver": "awslogs",
-              "options": {
-                  "awslogs-group": "my-ecs-service-loggroup",
-                  "awslogs-region": "ap-northeast-2",
-                  "awslogs-stream-prefix": "app-logstream"
-              }
-          }
-      }
-  ],
-  "family": "tf-race-record-task",
-  "executionRoleArn": "arn:aws:iam::648098991845:role/tf-ecsTaskExecutionRole",
-  "networkMode": "awsvpc",
-  "revision": 10,
-  "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-      },
-      {
-          "name": "ecs.capability.execution-role-awslogs"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-      },
-      {
-          "name": "ecs.capability.task-eni"
-      }
-  ],
-  "placementConstraints": [],
-  "compatibilities": [
-      "EC2",
-      "FARGATE"
-  ],
-  "requiresCompatibilities": [
-      "FARGATE"
-  ],
-  "cpu": "512",
-  "memory": "2048",
-  "registeredAt": "2023-06-19T07:16:57.062Z",
-  "registeredBy": "arn:aws:iam::648098991845:root",
-  "tags": []
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-2:648098991845:task-definition/tf-race-point-task:1",
+    "containerDefinitions": [
+        {
+            "name": "tf-race-point-task",
+            "image": "648098991845.dkr.ecr.ap-northeast-2.amazonaws.com/point:0.1",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 5500,
+                    "hostPort": 5500,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "TYPEORM_PASSWORD",
+                    "value": "dltkddbs"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "tf-point-ecs-service-loggroup",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "app-logstream"
+                }
+            }
+        }
+    ],
+    "family": "tf-race-point-task",
+    "executionRoleArn": "arn:aws:iam::648098991845:role/tf-point-ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "2048",
+    "registeredAt": "2023-06-20T10:00:24.671Z",
+    "registeredBy": "arn:aws:iam::648098991845:user/sangyunn",
+    "tags": []
 }
