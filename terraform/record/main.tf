@@ -1,6 +1,6 @@
 # Create an ECS cluster
 resource "aws_ecs_cluster" "race_cluster" {
-  name = "race_cluster"
+  name = "race-record-cluster"
 }
 
 resource "aws_ecs_task_definition" "app_task" {
@@ -37,13 +37,13 @@ resource "aws_ecs_task_definition" "app_task" {
   DEFINITION
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  memory                   = 3072
-  cpu                      = 1024
+  memory                   = 2048
+  cpu                      = 512
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name               = "tf-ecsTaskExecutionRole"
+  name               = "tf-record-ecsTaskExecutionRole"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
@@ -64,7 +64,7 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
 }
 
 resource "aws_cloudwatch_log_group" "my_ecs_service_log_group" {
-  name = "my-ecs-service-loggroup"
+  name = "tf-record-ecs-service-loggroup"
 }
 
 ################################################################
