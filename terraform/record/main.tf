@@ -1,9 +1,45 @@
-# Create an ECS cluster
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+################################################################
+##               E   C   S                                     #
+################################################################
+
+resource "aws_ecs_service" "my_ecs_service" {
+  name                               = "tf-ecs-service"
+  cluster                            = aws_ecs_cluster.race_cluster.id
+  task_definition                    = aws_ecs_task_definition.app_task.arn
+  desired_count                      = 1
+  deployment_minimum_healthy_percent = 50
+  deployment_maximum_percent         = 200
+  launch_type                        = "FARGATE"
+  scheduling_strategy                = "REPLICA"
+
+  network_configuration {
+    security_groups  = [aws_security_group.public_sg.id]
+    subnets          = module.vpc.public_subnets
+    assign_public_ip = true
+  }
+
+  load_balancer {
+    target_group_arn = aws_alb_target_group.my_ecs_target_group.arn
+    container_name   = "tf-race-record-task"
+    container_port   = 5500
+  }
+}
+
 resource "aws_ecs_cluster" "race_cluster" {
   name = "race-record-cluster"
 }
 
 resource "aws_ecs_task_definition" "app_task" {
+  depends_on = [ module.db ]
   family                   = "tf-race-record-task" # Name your task
   container_definitions    = <<DEFINITION
   [
@@ -28,8 +64,24 @@ resource "aws_ecs_task_definition" "app_task" {
       },
       "environment": [
         {
+          "name": "TYPEORM_HOST",
+          "value": "${module.db.db_instance_address}"
+        },
+        {
+          "name": "TYPEORM_USERNAME",
+          "value": "${var.DB_USERNAME}"
+        },
+        {
           "name": "TYPEORM_PASSWORD",
           "value": "${var.DB_PASSWORD}"
+        },
+        {
+          "name": "TYPEORM_DATABASE",
+          "value": "${var.DB_DATABASE}"
+        },
+        {
+          "name": "TYPEORM_PORT",
+          "value": "${var.DB_PORT}"
         },
         {
           "name": "QUEUE_URL",
@@ -111,29 +163,37 @@ resource "aws_alb_listener" "http" {
   }
 }
 
-################################################################
-##               E   C   S                                     #
-################################################################
+# ################################################################
+# ##               R    D   S                                    #
+# ################################################################
 
-resource "aws_ecs_service" "my_ecs_service" {
-  name                               = "tf-ecs-service"
-  cluster                            = aws_ecs_cluster.race_cluster.id
-  task_definition                    = aws_ecs_task_definition.app_task.arn
-  desired_count                      = 1
-  deployment_minimum_healthy_percent = 50
-  deployment_maximum_percent         = 200
-  launch_type                        = "FARGATE"
-  scheduling_strategy                = "REPLICA"
+module "db" {
+  source  = "terraform-aws-modules/rds/aws"
 
-  network_configuration {
-    security_groups  = [aws_security_group.public_sg.id]
-    subnets          = module.vpc.public_subnets
-    assign_public_ip = true
-  }
+  identifier = "race-db"
 
-  load_balancer {
-    target_group_arn = aws_alb_target_group.my_ecs_target_group.arn
-    container_name   = "tf-race-record-task"
-    container_port   = 5500
-  }
+  engine            = "mysql"
+  engine_version    = "5.7"
+  instance_class    = "db.t2.micro"
+  allocated_storage = 20
+
+  db_name  = var.DB_DATABASE
+  username = var.DB_USERNAME
+  password = var.DB_PASSWORD
+  port     = "3306"
+
+  create_random_password = false
+  iam_database_authentication_enabled = false
+
+  vpc_security_group_ids = [aws_security_group.private_sg.id]
+
+  skip_final_snapshot = true
+
+  create_db_subnet_group = true
+  subnet_ids             = module.vpc.private_subnets
+
+  family = "mysql5.7"
+
+  major_engine_version = "5.7"
+  storage_encrypted = false
 }
