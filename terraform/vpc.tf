@@ -41,7 +41,7 @@ resource "aws_vpc_endpoint" "tf_ecr_endpoint_api" {
   vpc_id               = module.vpc.vpc_id
   service_name         = "com.amazonaws.ap-northeast-2.ecr.api"
   vpc_endpoint_type    = "Interface"
-  security_group_ids = [aws_security_group.public_sg.id]
+  security_group_ids = [aws_security_group.private_sg.id]
   subnet_ids           = module.vpc.private_subnets
   private_dns_enabled = true
 }
@@ -50,7 +50,7 @@ resource "aws_vpc_endpoint" "tf_ecr_endpoint_dkr" {
   vpc_id               = module.vpc.vpc_id
   service_name         = "com.amazonaws.ap-northeast-2.ecr.dkr"
   vpc_endpoint_type    = "Interface"
-  security_group_ids = [aws_security_group.public_sg.id]
+  security_group_ids = [aws_security_group.private_sg.id]
   subnet_ids           = module.vpc.private_subnets
   private_dns_enabled = true
 }
@@ -59,7 +59,7 @@ resource "aws_vpc_endpoint" "tf_race_endpoint_logs" {
   vpc_id               = module.vpc.vpc_id
   service_name         = "com.amazonaws.ap-northeast-2.logs"
   vpc_endpoint_type    = "Interface"
-  security_group_ids = [aws_security_group.public_sg.id]
+  security_group_ids = [aws_security_group.private_sg.id]
   subnet_ids           = module.vpc.private_subnets
   private_dns_enabled = true
 }
@@ -68,7 +68,7 @@ resource "aws_vpc_endpoint" "tf_race_endpoint_sqs" {
   vpc_id               = module.vpc.vpc_id
   service_name         = "com.amazonaws.ap-northeast-2.sqs"
   vpc_endpoint_type    = "Interface"
-  security_group_ids = [aws_security_group.public_sg.id]
+  security_group_ids = [aws_security_group.private_sg.id]
   subnet_ids           = module.vpc.private_subnets
   private_dns_enabled = true
 }
