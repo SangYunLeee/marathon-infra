@@ -3,17 +3,14 @@ name: Deploy to Amazon ECR
 on:
   push:
     branches:
-      - feature/ecs-race-record
-  pull_request:
-    branches:
-      - main
+      - release/ecs-race-point
+
 env:
   AWS_REGION: ap-northeast-2
-  ECR_REPOSITORY: race
+  ECR_REPOSITORY: point
   ECS_SERVICE: tf-ecs-service
-  ECS_CLUSTER: race_record_cluster
-  ECS_TASK_DEFINITION: ./aws/task-definition.json
-  CONTAINER_NAME: tf-race-record-task
+  ECS_CLUSTER: tf-race-point-cluster
+  CONTAINER_NAME: tf-race-point-task
   
   
 jobs:
@@ -33,6 +30,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
+    - name: Set short git commit SHA
+      id: vars
+      run: |
+        calculatedSha=$(git rev-parse --short ${{ github.sha }})
+        echo "::set-output name=short_sha::$calculatedSha"
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
@@ -41,8 +44,8 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
-      working-directory: ./backend/race-backend
+        IMAGE_TAG: ${{ steps.vars.outputs.short_sha }}
+      working-directory: ./backend/point-backend
       run: |
         # Build a docker container and
         # push it to ECR so that it can
@@ -51,14 +54,21 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG || true
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
     
+    - name: Retrieve most recent ECS task definition JSON file
+      id: retrieve-task-def
+      run: |
+        aws ecs describe-task-definition --task-definition tf-race-point-task --query taskDefinition > task-definition.json
+        cat task-definition.json
+        echo "::set-output name=task-def-file::task-definition.json"
+        
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: ${{ env.ECS_TASK_DEFINITION }}
+        task-definition: ${{ steps.retrieve-task-def.outputs.task-def-file }}
         container-name: ${{ env.CONTAINER_NAME }}
         image: ${{ steps.build-image.outputs.image }}
-  
+    
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
