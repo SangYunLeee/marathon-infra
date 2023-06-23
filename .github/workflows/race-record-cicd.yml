@@ -8,8 +8,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   ECR_REPOSITORY: race
-  ECS_SERVICE: tf-ecs-service
-  ECS_CLUSTER: race-record-cluster
+  ECS_SERVICE: race-record-sv
+  ECS_CLUSTER: race-records-cluster
   CONTAINER_NAME: tf-race-record-task
   
 jobs:
@@ -50,7 +50,7 @@ jobs:
     - name: Retrieve most recent ECS task definition JSON file
       id: retrieve-task-def
       run: |
-        aws ecs describe-task-definition --task-definition tf-race-record-task --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition tf-race-record-task-inserted-console-rds --query taskDefinition > task-definition.json
         cat task-definition.json
         echo "::set-output name=task-def-file::task-definition.json"
       
