@@ -26,7 +26,14 @@ variable "DB_PORT" {
 }
 
 variable "QUEUE_URL" {
-  description = "QUEUE_URL"
   type        = string
   default     = "https://sqs.ap-northeast-2.amazonaws.com/648098991845/race-point-sqs"
+}
+
+variable "ACCESS_KEY_ID" {
+  type        = string
+}
+
+variable "SECRET_KEY" {
+  type        = string
 }

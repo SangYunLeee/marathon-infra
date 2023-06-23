@@ -28,8 +28,7 @@ resource "aws_security_group" "public_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    # 자신의 IP
-    cidr_blocks = ["211.184.118.141/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     from_port   = -1
@@ -37,10 +36,11 @@ resource "aws_security_group" "public_sg" {
     protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = "all"
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
@@ -50,13 +50,13 @@ resource "aws_security_group" "public_sg" {
 
 resource "aws_security_group" "private_sg" {
 
-  name = "TRF_SG_OPEN_ALL"
+  name = "TRF_SG_PRIVATE"
   vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port   = 0
-    to_port     = 65535
-    protocol    = "tcp"
+    to_port     = 0
+    protocol    = "all"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -70,7 +70,7 @@ resource "aws_security_group" "private_sg" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = "all"
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {

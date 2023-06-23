@@ -11,6 +11,9 @@ terraform {
 ##               E   C   S                                     #
 ################################################################
 
+resource "aws_ecs_cluster" "race_cluster" {
+  name = "race-record-cluster"
+}
 resource "aws_ecs_service" "my_ecs_service" {
   name                               = "tf-ecs-service"
   cluster                            = aws_ecs_cluster.race_cluster.id
@@ -23,8 +26,8 @@ resource "aws_ecs_service" "my_ecs_service" {
 
   network_configuration {
     security_groups  = [aws_security_group.public_sg.id]
-    subnets          = module.vpc.public_subnets
-    assign_public_ip = true
+    subnets          = module.vpc.private_subnets
+    assign_public_ip = false
   }
 
   load_balancer {
@@ -32,10 +35,6 @@ resource "aws_ecs_service" "my_ecs_service" {
     container_name   = "tf-race-record-task"
     container_port   = 5500
   }
-}
-
-resource "aws_ecs_cluster" "race_cluster" {
-  name = "race-record-cluster"
 }
 
 resource "aws_ecs_task_definition" "app_task" {
@@ -86,6 +85,14 @@ resource "aws_ecs_task_definition" "app_task" {
         {
           "name": "QUEUE_URL",
           "value": "${var.QUEUE_URL}"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "value": "${var.ACCESS_KEY_ID}"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "value": "${var.SECRET_KEY}"
         }
       ]
     }
@@ -117,6 +124,11 @@ data "aws_iam_policy_document" "assume_role_policy" {
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy-2" {
+  role       = aws_iam_role.ecsTaskExecutionRole.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
 }
 
 resource "aws_cloudwatch_log_group" "my_ecs_service_log_group" {
