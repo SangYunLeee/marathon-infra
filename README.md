@@ -3,7 +3,7 @@ Team: 김민주 / 김한수 / 문한성 / 이상윤
 
 Duration: 2023.06.12~2022.06.30
 
-## 요구사항
+## Requirement
 - 기능 요구사항
   ```
   - 개인 사용자와 대회주최자는 로그인 기능을 통해 토큰을 발급받을 수 있습니다.
@@ -43,10 +43,41 @@ Duration: 2023.06.12~2022.06.30
 <img src="https://img.shields.io/badge/terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=#7B42BC"> 
 </div>  
 
-## Prerequisites
-실행 방법 
--
+## Installation
+- 테라폼
+> 선수 조건:
+[테라폼 설치](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) 및 
+[AWS CLI 자격 증명](https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/prerequisites.html#prerequisites-configure-credentials)
 
+1. 테라폼 브랜치로 이동
+```bash
+$ git clone -b release/terraform https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/terraform
+$ cd devops-04-Final-Team3/terraform
+```
+2. 테라폼 리소스 생성
+테라폼을 통해 AWS 리소스를 생성한다.
+```
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
+- 백엔드 서버 (record 백엔드 기준)
+1. record 브랜치로 이동
+```bash
+$ git clone -b ecs-race-point https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-record
+$ cd devops-04-Final-Team3/backend/race-backend
+```
+2. 도커 파일 생성
+```bash
+docker build -t race-record .
+```
+3. 도커 파일 실행
+```bash
+docker run -p 5500:5500 race-record
+```
+  - user 백엔드 : [release/ecs-race-user](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-user)
+  - point 백엔드 : [release/ecs-race-point](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-point)
+  - record 백엔드 : [release/ecs-race-record](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-record)
 
 ### 기술스택
 - OS : Ubuntu 22.04
