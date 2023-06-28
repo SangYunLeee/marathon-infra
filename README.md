@@ -12,9 +12,7 @@ Duration: 2023.06.12~2022.06.30
   - 대회 주최자는 대회 참가자를 조회할 수 있습니다.
   - 대회 주최자는 대회 참가자들에 대한 공식 기록을 입력 및 조회할 수 있습니다.
   - 대회 주최자에 의해 입력된 공식 기록에 따라 해당 참가자의 point 데이터에 점수가 추가됩니다.
-      - 예시 : 10km 참가자는 10점, half 참가자는 20점, full 참가자는 42점 추가
   - 개인 사용자는 점수를 확인할 수 있습니다.
-      - 예시 : 전체 점수 또는 상위 몇개의 랭킹, 인증된 개인의 개별 점수
   ```
 - 인프라 요구사항
   ```
@@ -30,18 +28,28 @@ Duration: 2023.06.12~2022.06.30
 ## Architecture
 ![image](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/assets/35091494/9df3e687-ad29-4cf6-8b27-3b3034a5c5e0)
 
-
-
-
 ## **Environment**  
-<div>
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
-<img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=aws&logoColor=white">
-<img src="https://img.shields.io/badge/terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=#7B42BC"> 
-</div>  
+### <div style="display:flex; flex-direction:row;"> OS : <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> Backend Language : <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> DB : <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" style="vertical-align: middle;"> <img src="https://img.shields.io/badge/dynamodb-4053D6?style=for-the-badge&logo=amazondynamodb&logoColor=white" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> Framework : <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" style="vertical-align: middle;"> <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> Cloud Provider : <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=amazon aws&logoColor=white" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> CI/CD : <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" style="vertical-align: middle;">
+</div>
+
+### <div style="display:flex; flex-direction:row;"> IaC : <img src="https://img.shields.io/badge/terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=#7B42BC" style="vertical-align: middle;">
+</div>
+ 
 
 ## Installation
 - 테라폼
@@ -79,11 +87,4 @@ docker run -p 5500:5500 race-record
   - point 백엔드 : [release/ecs-race-point](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-point)
   - record 백엔드 : [release/ecs-race-record](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-record)
 
-### 기술스택
-- OS : Ubuntu 22.04
-- Backend Language : javascript 
-- DB : DynamoDB, RDS(Mysql)
-- Framework : Express, Node JS
-- Cloud Provider : AWS
-- CI : Git-Action
-- IaC : Terraform 1.4.6
+
