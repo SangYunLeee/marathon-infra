@@ -26,6 +26,7 @@ export const createApp = () => {
     res.status(200).send('TEST');
     connectMYSQL(req.body);
   })
+
   return app;
 };
 

@@ -10,6 +10,7 @@
     "author": "sangyun",
     "license": "ISC",
     "dependencies": {
+        "@aws-sdk/client-sqs": "^3.358.0",
         "@aws-sdk/types": "^3.347.0",
         "@types/cookie-parser": "^1.4.3",
         "@types/nodemon": "^1.19.2",

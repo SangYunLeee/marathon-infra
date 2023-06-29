@@ -1,8 +1,8 @@
 import express from 'express';
 import dataSource from "./database";
 
-import AWS from "aws-sdk";
-AWS.config.update({region: 'ap-northeast-2'});
+import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
+const client = new SQSClient({ region: "ap-northeast-2" });
 
 const createRecords = async (req: express.Request, res: express.Response) => {
   const {user_id, competition_id} = req.body;
@@ -46,8 +46,6 @@ export default {
 
 const sendMessage = async (userid: string) => {
   // Create an SQS service object
-  var sqs = new AWS.SQS({apiVersion: '2012-11-05'});
-
   var params = {
     DelaySeconds: 10,
     MessageAttributes: {
@@ -59,12 +57,5 @@ const sendMessage = async (userid: string) => {
     MessageBody: "please insert point by userId",
     QueueUrl: process.env.QUEUE_URL
   };
-
-  sqs.sendMessage(params, function(err, data) {
-    if (err) {
-      console.log("Error", err);
-    } else {
-      console.log("Success", data.MessageId);
-    }
-  });
+  await client.send(new SendMessageCommand(params));
 }
