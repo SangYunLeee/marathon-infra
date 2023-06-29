@@ -1,9 +1,12 @@
-# AWS 를 활용한 마라톤 대회 결과 기록 시스템
-Team: 김민주 / 김한수 / 문한성 / 이상윤
+# AWS 를 활용한 인프라 구성 프로젝트 (마라톤 대회 결과 기록 시스템)
+팀원: 이상윤 / 김민주 / 김한수 / 문한성
 
-Duration: 2023.06.12~2022.06.30
+기간: 2023.06.12~2022.06.30
 
-## Requirement
+## 간략한 설명
+AWS 클라우드 인프라를 구축하는 프로젝트입니다. 주제는 마라톤 대회 기록 시스템으로, 목표는 마라톤 대회에 사람들이 대회 참가를 신청하고 달리기 시간을 기록할 수 있도록 클라우드상에 백엔드 시스템를 구축 하는 것입니다.
+
+## 요구사항
 - 기능 요구사항
   ```
   - 개인 사용자와 대회주최자는 로그인 기능을 통해 토큰을 발급받을 수 있습니다.
@@ -22,45 +25,54 @@ Duration: 2023.06.12~2022.06.30
   - 기록 데이터를 기반으로 사용자별 점수를 기록하는 시스템은 데이터 유실을 막기 위해 느슨하게 결합되어야합니다.
   - 시스템 메트릭 또는 저장된 데이터에 대한 하나 이상의 시각화된 모니터링 시스템이 구축되어야합니다.
   ```
-## Description
-- 일단 패스 
 
-## Architecture
-![image](https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/assets/35091494/9df3e687-ad29-4cf6-8b27-3b3034a5c5e0)
+# 최종 산출물
+산출물로는 아키텍쳐 다이어그램, 테라폼, CI / CD, 백엔드 소스가 있습니다.
+## 아키텍쳐
+![](https://velog.velcdn.com/images/sororiri/post/82bc8f04-164e-4739-a320-d97fc8860ada/image.png)
 
-## **Environment**  
-### <div style="display:flex; flex-direction:row;"> OS : <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" style="vertical-align: middle;">
-</div>
+## 테라폼
+AWS 콘솔로 만들었던 인프라 리소스의 대부분을 테라폼 코드로 작성하였습니다.
+작성한 테라폼 리소스는 다음과 같습니다.
+- VPC 환경 (VPC, 서브넷, 보안그룹)
+- ECS 서비스에 필요한 관련 리소스
+   - Cluster
+   - Service
+   - Task Definition
+   - ALB
+   - 타겟 그룹
+   - VPC 엔드포인트
 
-### <div style="display:flex; flex-direction:row;"> Backend Language : <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" style="vertical-align: middle;">
-</div>
+## CI / CD
+백엔드 코드가 `릴리즈 브랜치` 에 머지될 때에 도커 이미지를 생성하여 배포될 수 있도록 구성하였습니다.
 
-### <div style="display:flex; flex-direction:row;"> DB : <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" style="vertical-align: middle;"> <img src="https://img.shields.io/badge/dynamodb-4053D6?style=for-the-badge&logo=amazondynamodb&logoColor=white" style="vertical-align: middle;">
-</div>
+## 백엔드 소스
+인프라 아키텍쳐를 테스트하기 위해 만들어진 비교적 간단한 백엔드 소스입니다.
+- 점수 관련 벡엔드 서버
+- 대회기록 벡엔드 서버
+- 유저정보 벡엔드 서버
 
-### <div style="display:flex; flex-direction:row;"> Framework : <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" style="vertical-align: middle;"> <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" style="vertical-align: middle;">
-</div>
-
-### <div style="display:flex; flex-direction:row;"> Cloud Provider : <img src="https://img.shields.io/badge/Amazon AWS-232F3E?style=for-the-badge&logo=amazon aws&logoColor=white" style="vertical-align: middle;">
-</div>
-
-### <div style="display:flex; flex-direction:row;"> CI/CD : <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" style="vertical-align: middle;">
-</div>
-
-### <div style="display:flex; flex-direction:row;"> IaC : <img src="https://img.shields.io/badge/terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=#7B42BC" style="vertical-align: middle;">
-</div>
+# **Environment**  
+|                | Description      |
+|----------------|------------------|
+| OS             | Ubuntu 22.04     |
+| Language       | Typescript       |
+| DB             | DynamoDB, MySQL  |
+| Framework      | Express, Node.JS |
+| Cloud Provider | AWS              |
+| CI             | Git-Action       |
+| IaC            | Terraform        |
  
-
-## Installation
-- 테라폼
+# 설치 방법
+### 테라폼을 통한 프로젝트의 AWS 리소스 프로비져닝
 > 선수 조건:
 [테라폼 설치](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) 및 
 [AWS CLI 자격 증명](https://docs.aws.amazon.com/ko_kr/serverless-application-model/latest/developerguide/prerequisites.html#prerequisites-configure-credentials)
 
-1. 테라폼 브랜치로 이동
+1. 프로젝트 레포 획득 및 테라폼 폴더 이동
 ```bash
-$ git clone -b release/terraform https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/terraform
-$ cd devops-04-Final-Team3/terraform
+$ git clone https://github.com/SangYunLeee/marathon-infra.git
+$ cd marathon-infra.git/terraform
 ```
 2. 테라폼 리소스 생성
 테라폼을 통해 AWS 리소스를 생성한다.
@@ -69,17 +81,17 @@ $ terraform init
 $ terraform plan
 $ terraform apply
 ```
-- 백엔드 서버 (record 백엔드 기준)
-1. record 브랜치로 이동
+### 백엔드 서버의 도커 이미지화 및 실행 (record 백엔드 기준)
+1. 프로젝트 레포 획득 및 백엔드 폴더 이동
 ```bash
-$ git clone -b ecs-race-point https://github.com/cs-devops-bootcamp/devops-04-Final-Team3/tree/release/ecs-race-record
-$ cd devops-04-Final-Team3/backend/race-backend
+$ git clone https://github.com/SangYunLeee/marathon-infra.git
+$ cd /marathon-infra.git/backend/race-backend
 ```
-2. 도커 파일 생성
+2. 도커 이미지 생성
 ```bash
 docker build -t race-record .
 ```
-3. 도커 파일 실행
+3. 도커 이미지 실행
 ```bash
 docker run -p 5500:5500 race-record
 ```
