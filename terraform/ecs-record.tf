@@ -78,14 +78,6 @@ resource "aws_ecs_task_definition" "record_task" {
         {
           "name": "QUEUE_URL",
           "value": "${var.QUEUE_URL}"
-        },
-        {
-          "name": "AWS_ACCESS_KEY_ID",
-          "value": "${var.ACCESS_KEY_ID}"
-        },
-        {
-          "name": "AWS_SECRET_ACCESS_KEY",
-          "value": "${var.SECRET_KEY}"
         }
       ]
     }
@@ -96,6 +88,7 @@ resource "aws_ecs_task_definition" "record_task" {
   memory                   = 2048
   cpu                      = 512
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
+  task_role_arn = aws_iam_role.ecsTaskExecutionRole.arn
 }
 
 resource "aws_cloudwatch_log_group" "ecs_record_service_log_group" {

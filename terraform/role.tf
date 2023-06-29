@@ -23,3 +23,8 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy-2" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchFullAccess"
 }
+
+resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy-3" {
+  role       = aws_iam_role.ecsTaskExecutionRole.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
